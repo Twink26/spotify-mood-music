@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
 
+// Mood-based songs
 const moodSongs = {
   Happy: [
     { title: "Happy - Pharrell Williams", url: "https://youtu.be/ZbZSe6N_BXs" },
@@ -19,13 +20,24 @@ const moodSongs = {
   ],
 };
 
+// Mood-based background colors
+const moodBackground = {
+  Happy: "#ffe066",
+  Sad: "#a29bfe",
+  Chill: "#55efc4",
+};
+
 function App() {
   const [selectedMood, setSelectedMood] = useState("");
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{ backgroundColor: moodBackground[selectedMood] || "#ffffff", minHeight: "100vh", padding: "20px" }}
+    >
       <h1>Mood Music Recommender</h1>
-      <p>Pick Up your mood</p>
+      <p>Pick your mood:</p>
+
       {Object.keys(moodSongs).map((mood) => (
         <button key={mood} onClick={() => setSelectedMood(mood)} style={{ margin: "10px" }}>
           {mood}
@@ -33,6 +45,7 @@ function App() {
       ))}
 
       <hr />
+
       <h2>{selectedMood ? `Songs for ${selectedMood} mood:` : "Pick a mood to get started!"}</h2>
       <ul>
         {selectedMood &&
