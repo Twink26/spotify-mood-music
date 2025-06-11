@@ -1,0 +1,40 @@
+.App {
+  text-align: center;
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+}
+
+input {
+  padding: 0.5rem;
+  width: 250px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.playlist-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 20px;
+}
+
+.playlist-card {
+  border: 1px solid #ccc;
+  padding: 1rem;
+  width: 200px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.playlist-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
