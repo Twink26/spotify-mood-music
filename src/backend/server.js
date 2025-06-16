@@ -1,12 +1,10 @@
 require('dotenv').config();
 
-
-const fetch = require("node-fetch");  // Remove if Node >=18
+const fetch = require("node-fetch"); 
 const express = require("express");
 const cors = require("cors");
 
 const app = express();
-
 app.use(cors());
 
 const clientId = process.env.CLIENT_ID;
@@ -14,7 +12,6 @@ const clientSecret = process.env.CLIENT_SECRET;
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
 
 let accessToken = "";
 let tokenExpireTime = 0;
@@ -83,20 +80,24 @@ app.get("/playlists/:mood", async (req, res) => {
       });
     }
 
-    // Filter out null and invalid playlist items safely
     const playlists = (data.playlists.items || [])
-      .filter((playlist) => playlist && playlist.name && playlist.external_urls && playlist.external_urls.spotify)
+      .filter((playlist) => playlist && playlist.name && playlist.external_urls?.spotify)
       .map((playlist) => ({
         name: playlist.name,
         url: playlist.external_urls.spotify,
-        image: playlist.images && playlist.images.length > 0 ? playlist.images[0].url : null,
+        image: playlist.images?.[0]?.url || null,
       }));
 
     res.json(playlists);
-  } catch (error) {
-    console.error("Error fetching playlists:", error);
-    res.status(500).json({ error: "Failed to fetch playlists" });
+   } catch (error) {
+    console.error("❌ Error fetching playlists:", error.message);
+    console.error(error.stack);
+    res.status(500).json({ 
+      error: "Failed to fetch playlists", 
+      message: error.message 
+    });
   }
+
 });
 
 
